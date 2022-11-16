@@ -5,7 +5,7 @@ class Book{
 public:
 //constructors
     Book();
-    Book(std::string name = "", std::string surname = "",std::string book_title = "",ISBN code , Date copyright, bool available = true){};
+    Book(std::string name = "", std::string surname = "",std::string book_title = "",ISBN code , Date copyright, bool available = true);
     //copy constructor
     Book(const Book& b);
     //move constructor
