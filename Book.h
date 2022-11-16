@@ -1,6 +1,8 @@
 #ifndef Book_h
 #define Book_h
 #include <iostream>
+#include "Date.h"
+#include "ISBN.h"
 class Book{
 public:
 //constructors
@@ -27,9 +29,9 @@ public:
     //mette a true available, se lo e' gia' lancia un'eccezione
     void give_back();
 private:
-    std::string auth_name;
-    std::string auth_surname ;
-    std::string title;
+    std::string auth_name = "";
+    std::string auth_surname = "";
+    std::string title = "";
     ISBN isbn_code;
     Date copyright_date;
     bool available;
