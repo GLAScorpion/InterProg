@@ -8,15 +8,7 @@ public:
 //constructors
     Book();
     Book(std::string name, std::string surname,std::string book_title,ISBN code , Date copyright, bool available = true);
-    //copy constructor
-    Book(const Book& b);
-    //move constructor
-    Book(Book&& b);
 //operators
-    //copy assignment
-    Book& operator=(const Book& b);
-    //move assignment
-    Book& operator=(Book&& b);
 //member functions
     ISBN get_isbn() const;
     Date get_date() const;

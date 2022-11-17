@@ -7,3 +7,7 @@ Book.cpp
 ISBN.cpp
 Date.cpp
 )
+add_executable(datetester
+    Datetester.cpp
+    Date.cpp
+)

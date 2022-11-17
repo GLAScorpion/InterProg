@@ -12,5 +12,4 @@ private:
     int n3;
     char x;
 };
-
 #endif
