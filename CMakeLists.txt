@@ -11,3 +11,7 @@ add_executable(datetester
     Datetester.cpp
     Date.cpp
 )
+add_executable(isbntester
+    ISBNtester.cpp
+    ISBN.cpp
+)
