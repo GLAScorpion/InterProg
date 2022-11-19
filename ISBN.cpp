@@ -25,6 +25,7 @@ bool is_alphanum(const char& c){// creato perchè isalnum() non funzionava corre
     if((conv >47 and conv <58)or(conv>64 and conv<91)or(conv>96 and conv<123)) return true;
     return false;
 }
+//COSTRUTTORI
 ISBN::ISBN(const std::string& s)
 :digit{0,0,0}
 {
@@ -33,11 +34,11 @@ ISBN::ISBN(const std::string& s)
         if((i+1)%4==0){
             if(s[i]!='-')throw std::invalid_argument("Invalid ISBN format");
         }else{
-            if(isdigit(s[i])!=1)throw std::invalid_argument("Invalid ISBN format");
+            if(isdigit(s[i])==0)throw std::invalid_argument("Invalid ISBN format");
             digit[i/4]+=(to_int(s[i]))*pow(10,(ISBN_length-i-3)%4);
         }
     }
-    if(!is_alphanum(s[ISBN_length-1]))throw std::invalid_argument("Invalid ISBN format");
+    if(isalnum(s[ISBN_length-1]==0))throw std::invalid_argument("Invalid ISBN format");
     x = toupper(s[ISBN_length-1]);//abbiamo deciso che minuscole e maiuscole non sono codici differenti
 }
 ISBN::ISBN(int n1, int n2, int n3, char c )
@@ -51,7 +52,7 @@ ISBN::ISBN(int n1, int n2, int n3, char c )
     digit[2] = n3;
     x = toupper(c);
 }
-std::ostream& operator<<(std::ostream& os, ISBN a){
+std::ostream& operator<<(std::ostream& os, const ISBN& a){
     for(int i = 0;i <3-log10(a.get_digit0())-1;i++){
         os<<"0";
     }
@@ -66,13 +67,15 @@ std::ostream& operator<<(std::ostream& os, ISBN a){
     os<<a.get_digit2()<<"-";
     return os<<a.get_final();
 }
-bool operator==(ISBN a, ISBN b){
-    if(a.get_digit0()!=b.get_digit0())return false;
-    if(a.get_digit1()!=b.get_digit1())return false;
-    if(a.get_digit2()!=b.get_digit2())return false;
-    if(a.get_final()!=b.get_final())return false;
+bool ISBN::operator==(const ISBN& b) const
+{
+    if(digit[0]!=b.digit[0])return false;
+    if(digit[1]!=b.digit[1])return false;
+    if(digit[2]!=b.digit[2])return false;
+    if(x!=b.x)return false;
     return true;
 }
-bool operator!=(ISBN a, ISBN b){
-    return !(a==b);
+bool ISBN::operator!=(const ISBN& b) const
+{
+    return !(*this==b);
 }

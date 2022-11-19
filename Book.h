@@ -7,7 +7,8 @@ class Book{
 public:
 //constructors
     Book();
-    Book(std::string name, std::string surname,std::string book_title, const std::string& code , Date copyright, bool available);
+    Book(std::string name, std::string surname,std::string book_title, ISBN code , Date copyright = Date(), bool disponibile = true);
+    Book(std::string name, std::string surname,std::string book_title, const std::string& code , Date copyright = Date(), bool disponibile = true);
 //member functions
     ISBN get_isbn() const {return isbn_code;}
     Date get_date() const {return copyright_date;}
@@ -19,6 +20,9 @@ public:
     void borrow();
     //mette a true available, se lo e' gia' lancia un'eccezione
     void give_back();
+//operators
+    bool operator==(const Book& b) const;
+    bool operator!=(const Book& b) const;
 private:
     std::string auth_name ;
     std::string auth_surname ;
@@ -27,7 +31,5 @@ private:
     Date copyright_date;
     bool available;
 };
-//bool operator==(const Book& a,const Book& b){return true; }
-//bool operator!=(const Book& a,const Book& b){return b.get_isbn() != a.get_isbn();}
 std::ostream& operator<<(std::ostream& os, const Book& b );
 #endif
