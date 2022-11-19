@@ -4,18 +4,18 @@
 class ISBN{
 public:
 //costruttori
-    ISBN();
+    ISBN():x{'0'},digit{0,0,0}{}
     explicit ISBN(int n1, int n2 , int n3, char c);
-    explicit ISBN(std::string s);
-    bool operator==(ISBN b);
-    bool operator!=(ISBN b);
-    int get_digit0(){return digit[0];}
-    int get_digit1(){return digit[1];}
-    int get_digit2(){return digit[2];}
-    char get_final(){return x;}
+    explicit ISBN(const std::string& s);
+    int get_digit0()const{return digit[0];}
+    int get_digit1()const{return digit[1];}
+    int get_digit2()const{return digit[2];}
+    char get_final()const{return x;}
 private:
     int digit[3];
     char x;
 };
+bool operator==(ISBN a, ISBN b);
+bool operator!=(ISBN a , ISBN b);
 std::ostream& operator<<(std::ostream& os, ISBN a);
 #endif

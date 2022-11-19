@@ -9,7 +9,7 @@ Date::Date(int d, int m, int y)
     year = y;
     day = d;
 }
-bool Date::is_valid(int m, int d, int y){
+bool is_valid(int m, int d, int y){
     if((m<0)or(m>12)or(d<0)or(y<0)or(y>2022)) return false;
     if(m == 2){
         if(is_bisestile(y)){
@@ -22,7 +22,7 @@ bool Date::is_valid(int m, int d, int y){
     if(d>31) return false;
     return true;
 }
-bool Date::is_bisestile(int y){
+bool is_bisestile(int y){
     if(y%4 == 0){
         if(y%100 == 0){
             if(y%400 == 0){
@@ -34,7 +34,7 @@ bool Date::is_bisestile(int y){
     }
     return false;
 }
-std::vector<std::string> month_name = {"january","february","march","april","may","june","july","august","september","october","november","december"};
+const std::vector<std::string> month_name = {"january","february","march","april","may","june","july","august","september","october","november","december"};
 std::ostream& operator<<(std::ostream& os, Month m){
     return os<<month_name[static_cast<int>(m)-1];
 }

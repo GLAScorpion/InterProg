@@ -4,7 +4,7 @@
 #include <vector>
 enum class Month{
         jan = 1, feb , mar, apr, may, jun, jul, aug, sep, oct, nov, dec
-    };
+};
 
 class Date{
     public:
@@ -14,12 +14,13 @@ class Date{
     Month get_month() const{return month;}
     int get_year() const{return year;}
     private:
-    bool is_valid(int m, int d, int y);
-    bool is_bisestile(int y);
+    
     Month month;
     int day;
     int year;
 };
+bool is_valid(int m, int d, int y);  
+bool is_bisestile(int y);
 std::ostream& operator<<(std::ostream& os, Month m);
 std::ostream& operator<<(std::ostream& os, Date d);
 #endif
