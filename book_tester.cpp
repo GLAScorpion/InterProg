@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Book.h"
+#include "book.h"
 using namespace std;
 int main(){
     Book a {"amogus" ,"sus","when the impostor is sus","999-344-432-s",Date(1,1,1970)};
@@ -8,4 +8,5 @@ int main(){
     Book trimone{"Big J","The Holy One","Once upon a time... The Bible","999-344-432-S"};
     cout<<a<<endl<<endl<<my_favourite_book<<endl<<endl<<trimone<<endl;
     cout<<boolalpha<<(a==trimone)<<" "<<boolalpha<<(a==my_favourite_book)<<endl;
+    a.Borrow();
 }

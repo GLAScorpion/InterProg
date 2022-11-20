@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Date.h"
+#include "date.h"
 using namespace std;
 int main(){
     Date x = Date(12,10,1950);
@@ -9,5 +9,8 @@ int main(){
     cout << x << " " <<b<<endl;
     Date a{29,2,2000};
     cout<<a<<endl;
-    
+    a.set_month(5);
+    cout<<a<<endl;
+    a.set_month(Month::jan);
+    cout<<a<<endl;
 }

@@ -1,8 +1,8 @@
-#ifndef Book_h
-#define Book_h
+#ifndef book_h
+#define book_h
 #include <iostream>
-#include "Date.h"
-#include "ISBN.h"
+#include "date.h"
+#include "isbn.h"
 class Book{
 public:
 //constructors
@@ -12,14 +12,14 @@ public:
 //member functions
     ISBN get_isbn() const {return isbn_code;}
     Date get_date() const {return copyright_date;}
-    bool isavailable() const {return available;}
+    bool is_available() const {return available;}
     std::string get_name() const {return auth_name;}
     std::string get_surname() const {return auth_surname;}
     std::string get_title() const {return title;}
     //mette a false available, se lo e' gia' lancia un'eccezione
-    void borrow();
+    void Borrow(); //prestito del libro
     //mette a true available, se lo e' gia' lancia un'eccezione
-    void give_back();
+    void GiveBack(); //restituzione del libro
 //operators
     bool operator==(const Book& b) const;
     bool operator!=(const Book& b) const;
@@ -31,5 +31,6 @@ private:
     Date copyright_date;
     bool available;
 };
+//HELPER FUNCTIONS
 std::ostream& operator<<(std::ostream& os, const Book& b );
 #endif

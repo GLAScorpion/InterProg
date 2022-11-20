@@ -1,50 +1,27 @@
 #include <iostream>
-#include "ISBN.h"
-const int ISBN_length = 13;
-const int max_n = 999;
-int pow(int b, int exp){
-    int res = 1;
-    for(int i = 0; i<exp;i++){
-        res = res*b;
-    }
-    return res;
-}
-int log10(int val){
-    int res = 0;
-    while(val >= 10){
-        val = val /10;
-        res ++;
-    }
-    return res;
-}
-int to_int(const char& c){
-    return static_cast<int>(c)-48;
-}
-bool is_alphanum(const char& c){// creato perchè isalnum() non funzionava correttamente
-    int conv = static_cast<int>(c);
-    if((conv >47 and conv <58)or(conv>64 and conv<91)or(conv>96 and conv<123)) return true;
-    return false;
-}
-//COSTRUTTORI
+#include "isbn.h"
+const int kIsbnLength = 13; //lunghezza della stringa
+const int kMaxN = 999;
+//CONSTRUCTORS
 ISBN::ISBN(const std::string& s)
 :digit{0,0,0}
 {
-    if(s.length()!=ISBN_length) throw std::invalid_argument("Invalid ISBN format");
-    for(int i = 0; i<ISBN_length-1;i++){
+    if(s.length()!=kIsbnLength) throw std::invalid_argument("Invalid ISBN format");
+    for(int i = 0; i<kIsbnLength-1;i++){
         if((i+1)%4==0){
             if(s[i]!='-')throw std::invalid_argument("Invalid ISBN format");
         }else{
             if(isdigit(s[i])==0)throw std::invalid_argument("Invalid ISBN format");
-            digit[i/4]+=(to_int(s[i]))*pow(10,(ISBN_length-i-3)%4);
+            digit[i/4]+=(ToInt(s[i]))*Pow(10,(kIsbnLength-i-3)%4);
         }
     }
-    if(isalnum(s[ISBN_length-1]==0))throw std::invalid_argument("Invalid ISBN format");
-    x = toupper(s[ISBN_length-1]);//abbiamo deciso che minuscole e maiuscole non sono codici differenti
+    if(isalnum(s[kIsbnLength-1]==0))throw std::invalid_argument("Invalid ISBN format");
+    x = toupper(s[kIsbnLength-1]);//abbiamo deciso che minuscole e maiuscole non sono codici differenti
 }
 ISBN::ISBN(int n1, int n2, int n3, char c )
 :digit{0,0,0}
 {
-    if(n1<0 or n2<0 or n3<0 or n1>max_n or n2>max_n or n3>max_n or !is_alphanum(c)){
+    if(n1<0 or n2<0 or n3<0 or n1>kMaxN or n2>kMaxN or n3>kMaxN or isalnum(c)==0){
         throw std::invalid_argument("Invalid ISBN format");
     }
     digit[0] = n1;
@@ -52,21 +29,7 @@ ISBN::ISBN(int n1, int n2, int n3, char c )
     digit[2] = n3;
     x = toupper(c);
 }
-std::ostream& operator<<(std::ostream& os, const ISBN& a){
-    for(int i = 0;i <3-log10(a.get_digit0())-1;i++){
-        os<<"0";
-    }
-    os<<a.get_digit0()<<"-";
-    for(int i = 0;i<3-log10(a.get_digit1())-1;i++){
-        os<<"0";
-    }
-    os<<a.get_digit1()<<"-";
-    for(int i = 0;i<3-log10(a.get_digit2())-1;i++){
-        os<<"0";
-    }
-    os<<a.get_digit2()<<"-";
-    return os<<a.get_final();
-}
+//OPERATORS
 bool ISBN::operator==(const ISBN& b) const
 {
     if(digit[0]!=b.digit[0])return false;
@@ -78,4 +41,38 @@ bool ISBN::operator==(const ISBN& b) const
 bool ISBN::operator!=(const ISBN& b) const
 {
     return !(*this==b);
+}
+//HELPER FUNCTIONS
+std::ostream& operator<<(std::ostream& os, const ISBN& a){
+    for(int i = 0;i <3-Log10(a.get_digit0())-1;i++){
+        os<<"0";
+    }
+    os<<a.get_digit0()<<"-";
+    for(int i = 0;i<3-Log10(a.get_digit1())-1;i++){
+        os<<"0";
+    }
+    os<<a.get_digit1()<<"-";
+    for(int i = 0;i<3-Log10(a.get_digit2())-1;i++){
+        os<<"0";
+    }
+    os<<a.get_digit2()<<"-";
+    return os<<a.get_final();
+}
+int Pow(int b, int exp){ 
+    int res = 1;
+    for(int i = 0; i<exp;i++){
+        res = res*b;
+    }
+    return res;
+}
+int Log10(int val){ 
+    int res = 0;
+    while(val >= 10){
+        val = val /10;
+        res ++;
+    }
+    return res;
+}
+int ToInt(const char& c){ 
+    return static_cast<int>(c)-static_cast<int>('0');
 }
